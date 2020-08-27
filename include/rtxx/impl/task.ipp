@@ -21,8 +21,12 @@ namespace this_task
 {
 namespace detail
 {
-thread_local task *current_task;
+task *&current_task()
+{
+  thread_local task *t = 0;
+  return t;
 }
+} // namespace detail
 
 void yield(error_code &ec)
 {
@@ -143,7 +147,7 @@ void task::set_periodic(RTIME start, RTIME interval, error_code &ec)
 
 unsigned task::wait_period(error_code &ec)
 {
-  assert(this == this_task::detail::current_task);
+  assert(this == this_task::detail::current_task());
 
 #if defined(RTXX_USE_POSIX)
   uint64_t buf;
@@ -170,7 +174,7 @@ unsigned task::wait_period()
 
 void task::detach()
 {
-  assert(this != this_task::detail::current_task);
+  assert(this != this_task::detail::current_task());
 
 #if defined(RTXX_USE_POSIX)
   int err = pthread_detach(h_);
@@ -188,12 +192,12 @@ void task::detach()
 void *task::entry(void *arg) noexcept
 {
   auto self = reinterpret_cast<task *>(arg);
-  this_task::detail::current_task = self;
+  this_task::detail::current_task() = self;
 
 #if defined(RTXX_USE_POSIX) && defined(RTXX_DEBUG)
   signal(SIGDEBUG, [](int sig) {
     fprintf(stderr, "Thread %s: Signal caught: %s\n",
-            this_task::detail::current_task->opts_.name, strsignal(sig));
+            this_task::detail::current_task()->opts_.name, strsignal(sig));
     print_backtrace();
   });
 

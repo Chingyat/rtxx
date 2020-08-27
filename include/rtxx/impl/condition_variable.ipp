@@ -3,6 +3,7 @@
 #include <cstring>
 #include <rtxx/condition_variable.hpp>
 #include <rtxx/error.hpp>
+#include <rtxx/mutex.hpp>
 
 namespace rtxx
 {

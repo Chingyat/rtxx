@@ -28,10 +28,10 @@ namespace this_task
 
 unsigned wait_period(error_code &ec)
 {
-  return detail::current_task->wait_period(ec);
+  return detail::current_task()->wait_period(ec);
 }
 
-unsigned wait_period() { return detail::current_task->wait_period(); }
+unsigned wait_period() { return detail::current_task()->wait_period(); }
 } // namespace this_task
 
 constexpr auto priority(int value)

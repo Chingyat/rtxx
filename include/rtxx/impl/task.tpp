@@ -9,14 +9,14 @@ namespace this_task
 template <typename Clock, typename Duration, typename Duration1>
 void set_periodic(chrono::time_point<Clock, Duration> start, Duration1 interval)
 {
-  detail::current_task->set_periodic(start, interval);
+  detail::current_task()->set_periodic(start, interval);
 }
 
 template <typename Clock, typename Duration, typename Duration1>
 void set_periodic(chrono::time_point<Clock, Duration> start, Duration1 interval,
                   error_code &ec)
 {
-  detail::current_task->set_periodic(start, interval, ec);
+  detail::current_task()->set_periodic(start, interval, ec);
 }
 
 } // namespace this_task

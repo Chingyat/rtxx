@@ -23,7 +23,7 @@ namespace this_task
 {
 namespace detail
 {
-extern thread_local task *current_task;
+RTXX_DECL task *&current_task();
 }
 
 /// Make the current task periodic
