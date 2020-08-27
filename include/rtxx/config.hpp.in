@@ -1,0 +1,10 @@
+#pragma once
+
+/* Define to use POSIX threads */
+#cmakedefine RTXX_USE_POSIX
+
+/* Define to use xenomai alchemy skin */
+#cmakedefine RTXX_USE_ALCHEMY
+
+/* Define to use xenomai RTDM skin */
+#cmakedefine RTXX_USE_RTDM
