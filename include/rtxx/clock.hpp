@@ -41,7 +41,7 @@ public:
   /// The posix clock ID of monotonic clock
   static const clockid_t clockid{CLOCK_MONOTONIC};
 
-  static const bool is_steady{false};
+  static const bool is_steady{true};
 
   /// Get the current clock value
   RTXX_DECL static time_point now();
@@ -61,7 +61,7 @@ public:
   using time_point = chrono::time_point<realtime_clock>;
   static const clockid_t clockid{CLOCK_REALTIME};
 
-  static const bool is_steady{true};
+  static const bool is_steady{false};
 
   /// Get the current clock value
   RTXX_DECL static time_point now();
